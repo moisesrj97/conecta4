@@ -796,557 +796,622 @@ let cpuDecision = () => {
       console.log(`Let´s start with...`, ranCol);
       return cpuYellow(ranCol);
     } else {
-      for (let i = 0; i < casillasAmarillas.length; i++) {
-        let fichaDer1;
-        let fichaDer2;
-        let fichaIzq1;
-        let fichaIzq2;
-        let fichaUp1;
-        let fichaUp2;
-        for (let j = 0; j < casillasAmarillas.length; j++) {
-          //Dos vertical
-          if (
-            casillasAmarillas[i].row - casillasAmarillas[j].row == 1 &&
-            casillasAmarillas[i].col == casillasAmarillas[j].col
-          ) {
-            fichaUp1 = document.querySelector(
-              `#col${casillasAmarillas[i].col}row${
-                casillasAmarillas[i].row + 1
-              }`
-            );
-            fichaUp2 = document.querySelector(
-              `#col${casillasAmarillas[i].col}row${
-                casillasAmarillas[i].row + 2
-              }`
-            );
+      
+        for (let i = 0; i < casillasAmarillas.length; i++) {
+          let fichaDer1;
+          let fichaDer2;
+          let fichaIzq1;
+          let fichaIzq2;
+          let fichaUp1;
+          let fichaUp2;
+          for (let j = 0; j < casillasAmarillas.length; j++) {
+            //Dos vertical
             if (
-              fichaUp1 &&
-              fichaUp2 &&
-              !fichaUp1.classList.contains("red") &&
-              !fichaUp1.classList.contains("yellow") &&
-              !fichaUp2.classList.contains("red") &&
-              !fichaUp2.classList.contains("yellow")
+              casillasAmarillas[i].row - casillasAmarillas[j].row == 1 &&
+              casillasAmarillas[i].col == casillasAmarillas[j].col
             ) {
-              console.log("I´d put a chip in", casillasAmarillas[i].col);
-              return cpuYellow(casillasAmarillas[i].col);
-            }
-          }
-          //Dos horizontal
-          else if (
-            casillasAmarillas[i].col - casillasAmarillas[j].col == 1 &&
-            casillasAmarillas[i].row == casillasAmarillas[j].row
-          ) {
-            fichaDer1 = document.querySelector(
-              `#col${casillasAmarillas[i].col + 1}row${
-                casillasAmarillas[i].row
-              }`
-            );
-            fichaDer2 = document.querySelector(
-              `#col${casillasAmarillas[i].col + 2}row${
-                casillasAmarillas[i].row
-              }`
-            );
-            fichaIzq1 = document.querySelector(
-              `#col${casillasAmarillas[i].col - 2}row${
-                casillasAmarillas[i].row
-              }`
-            );
-            fichaIzq2 = document.querySelector(
-              `#col${casillasAmarillas[i].col - 3}row${
-                casillasAmarillas[i].row
-              }`
-            );
-            //Supuesto de que existen 2 huecos a cada lado
-            if (fichaDer1 && fichaDer2 && fichaIzq1 && fichaIzq2) {
+              fichaUp1 = document.querySelector(
+                `#col${casillasAmarillas[i].col}row${
+                  casillasAmarillas[i].row + 1
+                }`
+              );
+              fichaUp2 = document.querySelector(
+                `#col${casillasAmarillas[i].col}row${
+                  casillasAmarillas[i].row + 2
+                }`
+              );
               if (
-                !fichaDer1.classList.contains("red") &&
-                !fichaDer1.classList.contains("yellow") &&
-                !fichaDer2.classList.contains("red") &&
-                !fichaDer2.classList.contains("yellow")
-              ) {
-                console.log("I´d put a chip in", casillasAmarillas[i].col + 1);
-                return cpuYellow(casillasAmarillas[i].col + 1);
-              } else if (
-                !fichaIzq1.classList.contains("red") &&
-                !fichaIzq1.classList.contains("yellow") &&
-                !fichaIzq2.classList.contains("red") &&
-                !fichaIzq2.classList.contains("yellow")
-              ) {
-                console.log("I´d put a chip in", casillasAmarillas[i].col - 2);
-                return cpuYellow(casillasAmarillas[i].col - 2);
-              } else if (
-                !fichaDer1.classList.contains("red") &&
-                !fichaDer1.classList.contains("yellow") &&
-                !fichaIzq1.classList.contains("red") &&
-                !fichaIzq1.classList.contains("yellow")
-              ) {
-                if (Math.floor(Math.random() * 2 + 1) == 1) {
-                  console.log(
-                    "I´d put a chip in",
-                    casillasAmarillas[i].col + 1
-                  );
-                  return cpuYellow(casillasAmarillas[i].col + 1);
-                } else {
-                  console.log(
-                    "I´d put a chip in",
-                    casillasAmarillas[i].col - 2
-                  );
-                  return cpuYellow(casillasAmarillas[i].col - 2);
-                }
-              }
-              //Supuesto de que las 2 fichas están pegadas al borde izquierdo
-            } else if (fichaDer1 && fichaDer2) {
-              if (
-                !fichaDer1.classList.contains("red") &&
-                !fichaDer1.classList.contains("yellow") &&
-                !fichaDer2.classList.contains("red") &&
-                !fichaDer2.classList.contains("yellow")
-              ) {
-                console.log("I´d put a chip in", casillasAmarillas[i].col + 1);
-                return cpuYellow(casillasAmarillas[i].col + 1);
-              }
-              //Supuesto de que las 2 fichas están pegadas al borde derecho del tablero
-            } else if (fichaIzq1 && fichaIzq2) {
-              if (
-                !fichaIzq1.classList.contains("red") &&
-                !fichaIzq1.classList.contains("yellow") &&
-                !fichaIzq2.classList.contains("red") &&
-                !fichaIzq2.classList.contains("yellow")
-              ) {
-                console.log("I´d put a chip in", casillasAmarillas[i].col - 2);
-                return cpuYellow(casillasAmarillas[i].col - 2);
-              }
-              //Supuesto de que las 2 fichas están a un espacio del borde izquierdo del tablero
-            } else if (fichaIzq1 && fichaDer1 && fichaDer2) {
-              if (
-                !fichaDer1.classList.contains("red") &&
-                !fichaDer1.classList.contains("yellow") &&
-                !fichaDer2.classList.contains("red") &&
-                !fichaDer2.classList.contains("yellow") &&
-                !fichaIzq1.classList.contains("red") &&
-                !fichaIzq1.classList.contains("yellow")
-              ) {
-                console.log("I´d put a chip in", casillasAmarillas[i].col - 2);
-                return cpuYellow(casillasAmarillas[i].col - 2);
-              }
-              //Supuesto de que las 2 fichas están a un espacio del borde derecho del tablero
-            } else if (fichaIzq1 && fichaIzq2 && fichaDer1) {
-              if (
-                !fichaDer1.classList.contains("red") &&
-                !fichaDer1.classList.contains("yellow") &&
-                !fichaIzq2.classList.contains("red") &&
-                !fichaIzq2.classList.contains("yellow") &&
-                !fichaIzq1.classList.contains("red") &&
-                !fichaIzq1.classList.contains("yellow")
-              ) {
-                console.log("I´d put a chip in", casillasAmarillas[i].col + 1);
-                return cpuYellow(casillasAmarillas[i].col + 1);
-              }
-            }
-          }
-          //Dos diagonal ascendente
-          else if (
-            casillasAmarillas[i].row - casillasAmarillas[j].row == 1 &&
-            casillasAmarillas[i].col - casillasAmarillas[j].col == 1
-          ) {
-            fichaDer1 = document.querySelector(
-              `#col${casillasAmarillas[i].col + 1}row${
-                casillasAmarillas[i].row + 1
-              }`
-            );
-            fichaDer2 = document.querySelector(
-              `#col${casillasAmarillas[i].col + 2}row${
-                casillasAmarillas[i].row + 2
-              }`
-            );
-            fichaIzq1 = document.querySelector(
-              `#col${casillasAmarillas[i].col - 2}row${
-                casillasAmarillas[i].row - 2
-              }`
-            );
-            fichaIzq2 = document.querySelector(
-              `#col${casillasAmarillas[i].col - 3}row${
-                casillasAmarillas[i].row - 3
-              }`
-            );
-            //Supuesto de que existen 2 huecos a cada lado
-            if (fichaDer1 && fichaDer2 && fichaIzq1 && fichaIzq2) {
-              if (
-                !fichaDer1.classList.contains("red") &&
-                !fichaDer1.classList.contains("yellow") &&
-                !fichaDer2.classList.contains("red") &&
-                !fichaDer2.classList.contains("yellow")
-              ) {
-                console.log("I´d put a chip in", casillasAmarillas[i].col + 1);
-                return cpuYellow(casillasAmarillas[i].col + 1);
-              } else if (
-                !fichaIzq1.classList.contains("red") &&
-                !fichaIzq1.classList.contains("yellow") &&
-                !fichaIzq2.classList.contains("red") &&
-                !fichaIzq2.classList.contains("yellow")
-              ) {
-                console.log("I´d put a chip in", casillasAmarillas[i].col - 2);
-                return cpuYellow(casillasAmarillas[i].col - 2);
-              } else if (
-                !fichaDer1.classList.contains("red") &&
-                !fichaDer1.classList.contains("yellow") &&
-                !fichaIzq1.classList.contains("red") &&
-                !fichaIzq1.classList.contains("yellow")
-              ) {
-                if (Math.floor(Math.random() * 2 + 1) == 1) {
-                  console.log(
-                    "I´d put a chip in",
-                    casillasAmarillas[i].col + 1
-                  );
-                  return cpuYellow(casillasAmarillas[i].col + 1);
-                } else {
-                  console.log(
-                    "I´d put a chip in",
-                    casillasAmarillas[i].col - 2
-                  );
-                  return cpuYellow(casillasAmarillas[i].col - 2);
-                }
-              }
-              //Supuesto de que las 2 fichas están pegadas al borde izquierdo
-            } else if (fichaDer1 && fichaDer2) {
-              if (
-                !fichaDer1.classList.contains("red") &&
-                !fichaDer1.classList.contains("yellow") &&
-                !fichaDer2.classList.contains("red") &&
-                !fichaDer2.classList.contains("yellow")
-              ) {
-                console.log("I´d put a chip in", casillasAmarillas[i].col + 1);
-                return cpuYellow(casillasAmarillas[i].col + 1);
-              }
-              //Supuesto de que las 2 fichas están pegadas al borde derecho del tablero
-            } else if (fichaIzq1 && fichaIzq2) {
-              if (
-                !fichaIzq1.classList.contains("red") &&
-                !fichaIzq1.classList.contains("yellow") &&
-                !fichaIzq2.classList.contains("red") &&
-                !fichaIzq2.classList.contains("yellow")
-              ) {
-                console.log("I´d put a chip in", casillasAmarillas[i].col - 2);
-                return cpuYellow(casillasAmarillas[i].col - 2);
-              }
-              //Supuesto de que las 2 fichas están a un espacio del borde izquierdo del tablero
-            } else if (fichaIzq1 && fichaDer1 && fichaDer2) {
-              if (
-                !fichaDer1.classList.contains("red") &&
-                !fichaDer1.classList.contains("yellow") &&
-                !fichaDer2.classList.contains("red") &&
-                !fichaDer2.classList.contains("yellow") &&
-                !fichaIzq1.classList.contains("red") &&
-                !fichaIzq1.classList.contains("yellow")
-              ) {
-                console.log("I´d put a chip in", casillasAmarillas[i].col - 2);
-                return cpuYellow(casillasAmarillas[i].col - 2);
-              }
-              //Supuesto de que las 2 fichas están a un espacio del borde derecho del tablero
-            } else if (fichaIzq1 && fichaIzq2 && fichaDer1) {
-              if (
-                !fichaDer1.classList.contains("red") &&
-                !fichaDer1.classList.contains("yellow") &&
-                !fichaIzq2.classList.contains("red") &&
-                !fichaIzq2.classList.contains("yellow") &&
-                !fichaIzq1.classList.contains("red") &&
-                !fichaIzq1.classList.contains("yellow")
-              ) {
-                console.log("I´d put a chip in", casillasAmarillas[i].col + 1);
-                return cpuYellow(casillasAmarillas[i].col + 1);
-              }
-            }
-          }
-          //Dos diagonal descendente
-          else if (
-            casillasAmarillas[i].row - casillasAmarillas[j].row == -1 &&
-            casillasAmarillas[i].col - casillasAmarillas[j].col == 1
-          ) {
-            fichaDer1 = document.querySelector(
-              `#col${casillasAmarillas[i].col + 1}row${
-                casillasAmarillas[i].row + -1
-              }`
-            );
-            fichaDer2 = document.querySelector(
-              `#col${casillasAmarillas[i].col + 2}row${
-                casillasAmarillas[i].row - 2
-              }`
-            );
-            fichaIzq1 = document.querySelector(
-              `#col${casillasAmarillas[i].col - 3}row${
-                casillasAmarillas[i].row + 3
-              }`
-            );
-            fichaIzq2 = document.querySelector(
-              `#col${casillasAmarillas[i].col - 4}row${
-                casillasAmarillas[i].row + 4
-              }`
-            );
-            //Supuesto de que existen 2 huecos a cada lado
-            if (fichaDer1 && fichaDer2 && fichaIzq1 && fichaIzq2) {
-              if (
-                !fichaDer1.classList.contains("red") &&
-                !fichaDer1.classList.contains("yellow") &&
-                !fichaDer2.classList.contains("red") &&
-                !fichaDer2.classList.contains("yellow")
-              ) {
-                console.log("I´d put a chip in", casillasAmarillas[i].col + 1);
-                return cpuYellow(casillasAmarillas[i].col + 1);
-              } else if (
-                !fichaIzq1.classList.contains("red") &&
-                !fichaIzq1.classList.contains("yellow") &&
-                !fichaIzq2.classList.contains("red") &&
-                !fichaIzq2.classList.contains("yellow")
-              ) {
-                console.log("I´d put a chip in", casillasAmarillas[i].col - 2);
-                return cpuYellow(casillasAmarillas[i].col - 2);
-              } else if (
-                !fichaDer1.classList.contains("red") &&
-                !fichaDer1.classList.contains("yellow") &&
-                !fichaIzq1.classList.contains("red") &&
-                !fichaIzq1.classList.contains("yellow")
-              ) {
-                if (Math.floor(Math.random() * 2 + 1) == 1) {
-                  console.log(
-                    "I´d put a chip in",
-                    casillasAmarillas[i].col + 1
-                  );
-                  return cpuYellow(casillasAmarillas[i].col + 1);
-                } else {
-                  console.log(
-                    "I´d put a chip in",
-                    casillasAmarillas[i].col - 2
-                  );
-                  return cpuYellow(casillasAmarillas[i].col - 2);
-                }
-              }
-              //Supuesto de que las 2 fichas están pegadas al borde izquierdo
-            } else if (fichaDer1 && fichaDer2) {
-              if (
-                !fichaDer1.classList.contains("red") &&
-                !fichaDer1.classList.contains("yellow") &&
-                !fichaDer2.classList.contains("red") &&
-                !fichaDer2.classList.contains("yellow")
-              ) {
-                console.log("I´d put a chip in", casillasAmarillas[i].col + 1);
-                return cpuYellow(casillasAmarillas[i].col + 1);
-              }
-              //Supuesto de que las 2 fichas están pegadas al borde derecho del tablero
-            } else if (fichaIzq1 && fichaIzq2) {
-              if (
-                !fichaIzq1.classList.contains("red") &&
-                !fichaIzq1.classList.contains("yellow") &&
-                !fichaIzq2.classList.contains("red") &&
-                !fichaIzq2.classList.contains("yellow")
-              ) {
-                console.log("I´d put a chip in", casillasAmarillas[i].col - 2);
-                return cpuYellow(casillasAmarillas[i].col - 2);
-              }
-              //Supuesto de que las 2 fichas están a un espacio del borde izquierdo del tablero
-            } else if (fichaIzq1 && fichaDer1 && fichaDer2) {
-              if (
-                !fichaDer1.classList.contains("red") &&
-                !fichaDer1.classList.contains("yellow") &&
-                !fichaDer2.classList.contains("red") &&
-                !fichaDer2.classList.contains("yellow") &&
-                !fichaIzq1.classList.contains("red") &&
-                !fichaIzq1.classList.contains("yellow")
-              ) {
-                console.log("I´d put a chip in", casillasAmarillas[i].col - 2);
-                return cpuYellow(casillasAmarillas[i].col - 2);
-              }
-              //Supuesto de que las 2 fichas están a un espacio del borde derecho del tablero
-            } else if (fichaIzq1 && fichaIzq2 && fichaDer1) {
-              if (
-                !fichaDer1.classList.contains("red") &&
-                !fichaDer1.classList.contains("yellow") &&
-                !fichaIzq2.classList.contains("red") &&
-                !fichaIzq2.classList.contains("yellow") &&
-                !fichaIzq1.classList.contains("red") &&
-                !fichaIzq1.classList.contains("yellow")
-              ) {
-                console.log("I´d put a chip in", casillasAmarillas[i].col + 1);
-                return cpuYellow(casillasAmarillas[i].col + 1);
-              }
-            }
-          }
-          //Una casillas aislada
-          else {
-            //Definir casillas de juego
-            // prettier-ignore
-            let fichaUp1 = document.querySelector(`#col${casillasAmarillas[i].col}row${casillasAmarillas[i].row + 1}`);
-            // prettier-ignore
-            let fichaUp2 = document.querySelector(`#col${casillasAmarillas[i].col}row${casillasAmarillas[i].row + 2}`);
-            // prettier-ignore
-            let fichaUp3 = document.querySelector(`#col${casillasAmarillas[i].col}row${casillasAmarillas[i].row + 3}`);
-            // prettier-ignore
-            let fichaDer1 = document.querySelector(`#col${casillasAmarillas[i].col + 1}row${casillasAmarillas[i].row}`);
-            // prettier-ignore
-            let fichaDer2 = document.querySelector(`#col${casillasAmarillas[i].col + 2}row${casillasAmarillas[i].row}`);
-            // prettier-ignore
-            let fichaDer3 = document.querySelector(`#col${casillasAmarillas[i].col + 3}row${casillasAmarillas[i].row}`);
-            // prettier-ignore
-            let fichaIzq1 = document.querySelector(`#col${casillasAmarillas[i].col - 1}row${casillasAmarillas[i].row}`);
-            // prettier-ignore
-            let fichaIzq2 = document.querySelector(`#col${casillasAmarillas[i].col - 2}row${casillasAmarillas[i].row}`);
-            // prettier-ignore
-            let fichaIzq3 = document.querySelector(`#col${casillasAmarillas[i].col - 3}row${casillasAmarillas[i].row}`);
-            // prettier-ignore
-            let fichaDaDer1 = document.querySelector(`#col${casillasAmarillas[i].col + 1}row${casillasAmarillas[i].row + 1}`);
-            // prettier-ignore
-            let fichaDaDer2 = document.querySelector(`#col${casillasAmarillas[i].col + 2}row${casillasAmarillas[i].row + 2}`);
-            // prettier-ignore
-            let fichaDaDer3 = document.querySelector(`#col${casillasAmarillas[i].col + 3}row${casillasAmarillas[i].row + 3}`);
-            // prettier-ignore
-            let fichaDaIzq1 = document.querySelector(`#col${casillasAmarillas[i].col - 1}row${casillasAmarillas[i].row - 1}`);
-            // prettier-ignore
-            let fichaDaIzq2 = document.querySelector(`#col${casillasAmarillas[i].col - 2}row${casillasAmarillas[i].row - 2}`);
-            // prettier-ignore
-            let fichaDaIzq3 = document.querySelector(`#col${casillasAmarillas[i].col - 3}row${casillasAmarillas[i].row - 3}`);
-            // prettier-ignore
-            let fichaDdDer1 = document.querySelector(`#col${casillasAmarillas[i].col + 1}row${casillasAmarillas[i].row - 1}`);
-            // prettier-ignore
-            let fichaDdDer2 = document.querySelector(`#col${casillasAmarillas[i].col + 2}row${casillasAmarillas[i].row - 2}`);
-            // prettier-ignore
-            let fichaDdDer3 = document.querySelector(`#col${casillasAmarillas[i].col + 3}row${casillasAmarillas[i].row - 3}`);
-            // prettier-ignore
-            let fichaDdIzq1 = document.querySelector(`#col${casillasAmarillas[i].col - 1}row${casillasAmarillas[i].row + 1}`);
-            // prettier-ignore
-            let fichaDdIzq2 = document.querySelector(`#col${casillasAmarillas[i].col - 2}row${casillasAmarillas[i].row + 2}`);
-            // prettier-ignore
-            let fichaDdIzq3 = document.querySelector(`#col${casillasAmarillas[i].col - 3}row${casillasAmarillas[i].row + 3}`);
-            //Comprobar posible horizontal
-            if (
-              fichaDer1 &&
-              fichaDer2 &&
-              fichaDer3 &&
-              fichaIzq1 &&
-              fichaIzq2 &&
-              fichaIzq3
-            ) {
-              if (
-                (!fichaDer1.classList.contains("red") &&
-                  !fichaDer2.classList.contains("red") &&
-                  !fichaDer3.classList.contains("red")) ||
-                (!fichaDer1.classList.contains("red") &&
-                  !fichaDer2.classList.contains("red") &&
-                  !fichaIzq1.classList.contains("red"))
-              ) {
-                console.log("I´d put a chip in", casillasAmarillas[i].col + 1);
-                return cpuYellow(casillasAmarillas[i].col + 1);
-              } else if (
-                (!fichaIzq1.classList.contains("red") &&
-                  !fichaIzq2.classList.contains("red") &&
-                  !fichaIzq3.classList.contains("red")) ||
-                (!fichaDer1.classList.contains("red") &&
-                  !fichaIzq1.classList.contains("red") &&
-                  !fichaIzq2.classList.contains("red"))
-              ) {
-                console.log("I´d put a chip in", casillasAmarillas[i].col - 1);
-                return cpuYellow(casillasAmarillas[i].col - 1);
-              }
-            } else if (!fichaIzq3 && fichaIzq2) {
-              if (
-                (!fichaDer1.classList.contains("red") &&
-                  !fichaDer2.classList.contains("red") &&
-                  !fichaDer3.classList.contains("red")) ||
-                (!fichaDer1.classList.contains("red") &&
-                  !fichaDer2.classList.contains("red") &&
-                  !fichaIzq1.classList.contains("red"))
-              ) {
-                console.log("I´d put a chip in", casillasAmarillas[i].col + 1);
-                return cpuYellow(casillasAmarillas[i].col + 1);
-              } else if (
-                !fichaDer1.classList.contains("red") &&
-                !fichaIzq1.classList.contains("red") &&
-                !fichaIzq2.classList.contains("red")
-              ) {
-                console.log("I´d put a chip in", casillasAmarillas[i].col - 1);
-                return cpuYellow(casillasAmarillas[i].col - 1);
-              }
-            } else if (!fichaDer3 && fichaDer2) {
-              if (
-                !fichaDer1.classList.contains("red") &&
-                !fichaDer2.classList.contains("red") &&
-                !fichaIzq1.classList.contains("red")
-              ) {
-                console.log("I´d put a chip in", casillasAmarillas[i].col + 1);
-                return cpuYellow(casillasAmarillas[i].col + 1);
-              } else if (
-                (!fichaIzq1.classList.contains("red") &&
-                  !fichaIzq2.classList.contains("red") &&
-                  !fichaIzq3.classList.contains("red")) ||
-                (!fichaDer1.classList.contains("red") &&
-                  !fichaIzq1.classList.contains("red") &&
-                  !fichaIzq2.classList.contains("red"))
-              ) {
-                console.log("I´d put a chip in", casillasAmarillas[i].col - 1);
-                return cpuYellow(casillasAmarillas[i].col - 1);
-              }
-            } else if (!fichaIzq2 && fichaIzq1) {
-              if (
-                (!fichaDer1.classList.contains("red") &&
-                  !fichaDer2.classList.contains("red") &&
-                  !fichaDer3.classList.contains("red")) ||
-                (!fichaDer1.classList.contains("red") &&
-                  !fichaDer2.classList.contains("red") &&
-                  !fichaIzq1.classList.contains("red"))
-              ) {
-                console.log("I´d put a chip in", casillasAmarillas[i].col + 1);
-                return cpuYellow(casillasAmarillas[i].col + 1);
-              }
-            } else if (!fichaDer2 && fichaDer1) {
-              if (
-                (!fichaIzq1.classList.contains("red") &&
-                  !fichaIzq2.classList.contains("red") &&
-                  !fichaIzq3.classList.contains("red")) ||
-                (!fichaDer1.classList.contains("red") &&
-                  !fichaIzq1.classList.contains("red") &&
-                  !fichaIzq2.classList.contains("red"))
-              ) {
-                console.log("I´d put a chip in", casillasAmarillas[i].col - 1);
-                return cpuYellow(casillasAmarillas[i].col - 1);
-              }
-            } else if (!fichaDer1) {
-              if (
-                !fichaIzq1.classList.contains("red") &&
-                !fichaIzq2.classList.contains("red") &&
-                !fichaIzq3.classList.contains("red")
-              ) {
-                console.log("I´d put a chip in", casillasAmarillas[i].col - 1);
-                return cpuYellow(casillasAmarillas[i].col - 1);
-              }
-            } else if (!fichaIzq1) {
-              if (
-                !fichaDer1.classList.contains("red") &&
-                !fichaDer2.classList.contains("red") &&
-                !fichaDer3.classList.contains("red")
-              ) {
-                console.log("I´d put a chip in", casillasAmarillas[i].col + 1);
-                return cpuYellow(casillasAmarillas[i].col + 1);
-              }
-            }
-            //Comprobar posible vertical
-            if (fichaUp1 && fichaIzq2 && fichaUp3) {
-              if (
-                !fichaUp3.classList.contains("red") &&
+                fichaUp1 &&
+                fichaUp2 &&
+                !fichaUp1.classList.contains("red") &&
+                !fichaUp1.classList.contains("yellow") &&
                 !fichaUp2.classList.contains("red") &&
-                !fichaUp1.classList.contains("red")
+                !fichaUp2.classList.contains("yellow")
               ) {
                 console.log("I´d put a chip in", casillasAmarillas[i].col);
                 return cpuYellow(casillasAmarillas[i].col);
               }
             }
-            //Comprobar posible diagonal ascendente
-            //Comprobar posible diagonal descendente
+            //Dos horizontal
+            else if (
+              casillasAmarillas[i].col - casillasAmarillas[j].col == 1 &&
+              casillasAmarillas[i].row == casillasAmarillas[j].row
+            ) {
+              fichaDer1 = document.querySelector(
+                `#col${casillasAmarillas[i].col + 1}row${
+                  casillasAmarillas[i].row
+                }`
+              );
+              fichaDer2 = document.querySelector(
+                `#col${casillasAmarillas[i].col + 2}row${
+                  casillasAmarillas[i].row
+                }`
+              );
+              fichaIzq1 = document.querySelector(
+                `#col${casillasAmarillas[i].col - 2}row${
+                  casillasAmarillas[i].row
+                }`
+              );
+              fichaIzq2 = document.querySelector(
+                `#col${casillasAmarillas[i].col - 3}row${
+                  casillasAmarillas[i].row
+                }`
+              );
+              //Supuesto de que existen 2 huecos a cada lado
+              if (fichaDer1 && fichaDer2 && fichaIzq1 && fichaIzq2) {
+                if (
+                  !fichaDer1.classList.contains("red") &&
+                  !fichaDer1.classList.contains("yellow") &&
+                  !fichaDer2.classList.contains("red") &&
+                  !fichaDer2.classList.contains("yellow")
+                ) {
+                  console.log(
+                    "I´d put a chip in",
+                    casillasAmarillas[i].col + 1
+                  );
+                  return cpuYellow(casillasAmarillas[i].col + 1);
+                } else if (
+                  !fichaIzq1.classList.contains("red") &&
+                  !fichaIzq1.classList.contains("yellow") &&
+                  !fichaIzq2.classList.contains("red") &&
+                  !fichaIzq2.classList.contains("yellow")
+                ) {
+                  console.log(
+                    "I´d put a chip in",
+                    casillasAmarillas[i].col - 2
+                  );
+                  return cpuYellow(casillasAmarillas[i].col - 2);
+                } else if (
+                  !fichaDer1.classList.contains("red") &&
+                  !fichaDer1.classList.contains("yellow") &&
+                  !fichaIzq1.classList.contains("red") &&
+                  !fichaIzq1.classList.contains("yellow")
+                ) {
+                  if (Math.floor(Math.random() * 2 + 1) == 1) {
+                    console.log(
+                      "I´d put a chip in",
+                      casillasAmarillas[i].col + 1
+                    );
+                    return cpuYellow(casillasAmarillas[i].col + 1);
+                  } else {
+                    console.log(
+                      "I´d put a chip in",
+                      casillasAmarillas[i].col - 2
+                    );
+                    return cpuYellow(casillasAmarillas[i].col - 2);
+                  }
+                }
+                //Supuesto de que las 2 fichas están pegadas al borde izquierdo
+              } else if (fichaDer1 && fichaDer2) {
+                if (
+                  !fichaDer1.classList.contains("red") &&
+                  !fichaDer1.classList.contains("yellow") &&
+                  !fichaDer2.classList.contains("red") &&
+                  !fichaDer2.classList.contains("yellow")
+                ) {
+                  console.log(
+                    "I´d put a chip in",
+                    casillasAmarillas[i].col + 1
+                  );
+                  return cpuYellow(casillasAmarillas[i].col + 1);
+                }
+                //Supuesto de que las 2 fichas están pegadas al borde derecho del tablero
+              } else if (fichaIzq1 && fichaIzq2) {
+                if (
+                  !fichaIzq1.classList.contains("red") &&
+                  !fichaIzq1.classList.contains("yellow") &&
+                  !fichaIzq2.classList.contains("red") &&
+                  !fichaIzq2.classList.contains("yellow")
+                ) {
+                  console.log(
+                    "I´d put a chip in",
+                    casillasAmarillas[i].col - 2
+                  );
+                  return cpuYellow(casillasAmarillas[i].col - 2);
+                }
+                //Supuesto de que las 2 fichas están a un espacio del borde izquierdo del tablero
+              } else if (fichaIzq1 && fichaDer1 && fichaDer2) {
+                if (
+                  !fichaDer1.classList.contains("red") &&
+                  !fichaDer1.classList.contains("yellow") &&
+                  !fichaDer2.classList.contains("red") &&
+                  !fichaDer2.classList.contains("yellow") &&
+                  !fichaIzq1.classList.contains("red") &&
+                  !fichaIzq1.classList.contains("yellow")
+                ) {
+                  console.log(
+                    "I´d put a chip in",
+                    casillasAmarillas[i].col - 2
+                  );
+                  return cpuYellow(casillasAmarillas[i].col - 2);
+                }
+                //Supuesto de que las 2 fichas están a un espacio del borde derecho del tablero
+              } else if (fichaIzq1 && fichaIzq2 && fichaDer1) {
+                if (
+                  !fichaDer1.classList.contains("red") &&
+                  !fichaDer1.classList.contains("yellow") &&
+                  !fichaIzq2.classList.contains("red") &&
+                  !fichaIzq2.classList.contains("yellow") &&
+                  !fichaIzq1.classList.contains("red") &&
+                  !fichaIzq1.classList.contains("yellow")
+                ) {
+                  console.log(
+                    "I´d put a chip in",
+                    casillasAmarillas[i].col + 1
+                  );
+                  return cpuYellow(casillasAmarillas[i].col + 1);
+                }
+              }
+            }
+            //Dos diagonal ascendente
+            else if (
+              casillasAmarillas[i].row - casillasAmarillas[j].row == 1 &&
+              casillasAmarillas[i].col - casillasAmarillas[j].col == 1
+            ) {
+              fichaDer1 = document.querySelector(
+                `#col${casillasAmarillas[i].col + 1}row${
+                  casillasAmarillas[i].row + 1
+                }`
+              );
+              fichaDer2 = document.querySelector(
+                `#col${casillasAmarillas[i].col + 2}row${
+                  casillasAmarillas[i].row + 2
+                }`
+              );
+              fichaIzq1 = document.querySelector(
+                `#col${casillasAmarillas[i].col - 2}row${
+                  casillasAmarillas[i].row - 2
+                }`
+              );
+              fichaIzq2 = document.querySelector(
+                `#col${casillasAmarillas[i].col - 3}row${
+                  casillasAmarillas[i].row - 3
+                }`
+              );
+              //Supuesto de que existen 2 huecos a cada lado
+              if (fichaDer1 && fichaDer2 && fichaIzq1 && fichaIzq2) {
+                if (
+                  !fichaDer1.classList.contains("red") &&
+                  !fichaDer1.classList.contains("yellow") &&
+                  !fichaDer2.classList.contains("red") &&
+                  !fichaDer2.classList.contains("yellow")
+                ) {
+                  console.log(
+                    "I´d put a chip in",
+                    casillasAmarillas[i].col + 1
+                  );
+                  return cpuYellow(casillasAmarillas[i].col + 1);
+                } else if (
+                  !fichaIzq1.classList.contains("red") &&
+                  !fichaIzq1.classList.contains("yellow") &&
+                  !fichaIzq2.classList.contains("red") &&
+                  !fichaIzq2.classList.contains("yellow")
+                ) {
+                  console.log(
+                    "I´d put a chip in",
+                    casillasAmarillas[i].col - 2
+                  );
+                  return cpuYellow(casillasAmarillas[i].col - 2);
+                } else if (
+                  !fichaDer1.classList.contains("red") &&
+                  !fichaDer1.classList.contains("yellow") &&
+                  !fichaIzq1.classList.contains("red") &&
+                  !fichaIzq1.classList.contains("yellow")
+                ) {
+                  if (Math.floor(Math.random() * 2 + 1) == 1) {
+                    console.log(
+                      "I´d put a chip in",
+                      casillasAmarillas[i].col + 1
+                    );
+                    return cpuYellow(casillasAmarillas[i].col + 1);
+                  } else {
+                    console.log(
+                      "I´d put a chip in",
+                      casillasAmarillas[i].col - 2
+                    );
+                    return cpuYellow(casillasAmarillas[i].col - 2);
+                  }
+                }
+                //Supuesto de que las 2 fichas están pegadas al borde izquierdo
+              } else if (fichaDer1 && fichaDer2) {
+                if (
+                  !fichaDer1.classList.contains("red") &&
+                  !fichaDer1.classList.contains("yellow") &&
+                  !fichaDer2.classList.contains("red") &&
+                  !fichaDer2.classList.contains("yellow")
+                ) {
+                  console.log(
+                    "I´d put a chip in",
+                    casillasAmarillas[i].col + 1
+                  );
+                  return cpuYellow(casillasAmarillas[i].col + 1);
+                }
+                //Supuesto de que las 2 fichas están pegadas al borde derecho del tablero
+              } else if (fichaIzq1 && fichaIzq2) {
+                if (
+                  !fichaIzq1.classList.contains("red") &&
+                  !fichaIzq1.classList.contains("yellow") &&
+                  !fichaIzq2.classList.contains("red") &&
+                  !fichaIzq2.classList.contains("yellow")
+                ) {
+                  console.log(
+                    "I´d put a chip in",
+                    casillasAmarillas[i].col - 2
+                  );
+                  return cpuYellow(casillasAmarillas[i].col - 2);
+                }
+                //Supuesto de que las 2 fichas están a un espacio del borde izquierdo del tablero
+              } else if (fichaIzq1 && fichaDer1 && fichaDer2) {
+                if (
+                  !fichaDer1.classList.contains("red") &&
+                  !fichaDer1.classList.contains("yellow") &&
+                  !fichaDer2.classList.contains("red") &&
+                  !fichaDer2.classList.contains("yellow") &&
+                  !fichaIzq1.classList.contains("red") &&
+                  !fichaIzq1.classList.contains("yellow")
+                ) {
+                  console.log(
+                    "I´d put a chip in",
+                    casillasAmarillas[i].col - 2
+                  );
+                  return cpuYellow(casillasAmarillas[i].col - 2);
+                }
+                //Supuesto de que las 2 fichas están a un espacio del borde derecho del tablero
+              } else if (fichaIzq1 && fichaIzq2 && fichaDer1) {
+                if (
+                  !fichaDer1.classList.contains("red") &&
+                  !fichaDer1.classList.contains("yellow") &&
+                  !fichaIzq2.classList.contains("red") &&
+                  !fichaIzq2.classList.contains("yellow") &&
+                  !fichaIzq1.classList.contains("red") &&
+                  !fichaIzq1.classList.contains("yellow")
+                ) {
+                  console.log(
+                    "I´d put a chip in",
+                    casillasAmarillas[i].col + 1
+                  );
+                  return cpuYellow(casillasAmarillas[i].col + 1);
+                }
+              }
+            }
+            //Dos diagonal descendente
+            else if (
+              casillasAmarillas[i].row - casillasAmarillas[j].row == -1 &&
+              casillasAmarillas[i].col - casillasAmarillas[j].col == 1
+            ) {
+              fichaDer1 = document.querySelector(
+                `#col${casillasAmarillas[i].col + 1}row${
+                  casillasAmarillas[i].row + -1
+                }`
+              );
+              fichaDer2 = document.querySelector(
+                `#col${casillasAmarillas[i].col + 2}row${
+                  casillasAmarillas[i].row - 2
+                }`
+              );
+              fichaIzq1 = document.querySelector(
+                `#col${casillasAmarillas[i].col - 3}row${
+                  casillasAmarillas[i].row + 3
+                }`
+              );
+              fichaIzq2 = document.querySelector(
+                `#col${casillasAmarillas[i].col - 4}row${
+                  casillasAmarillas[i].row + 4
+                }`
+              );
+              //Supuesto de que existen 2 huecos a cada lado
+              if (fichaDer1 && fichaDer2 && fichaIzq1 && fichaIzq2) {
+                if (
+                  !fichaDer1.classList.contains("red") &&
+                  !fichaDer1.classList.contains("yellow") &&
+                  !fichaDer2.classList.contains("red") &&
+                  !fichaDer2.classList.contains("yellow")
+                ) {
+                  console.log(
+                    "I´d put a chip in",
+                    casillasAmarillas[i].col + 1
+                  );
+                  return cpuYellow(casillasAmarillas[i].col + 1);
+                } else if (
+                  !fichaIzq1.classList.contains("red") &&
+                  !fichaIzq1.classList.contains("yellow") &&
+                  !fichaIzq2.classList.contains("red") &&
+                  !fichaIzq2.classList.contains("yellow")
+                ) {
+                  console.log(
+                    "I´d put a chip in",
+                    casillasAmarillas[i].col - 2
+                  );
+                  return cpuYellow(casillasAmarillas[i].col - 2);
+                } else if (
+                  !fichaDer1.classList.contains("red") &&
+                  !fichaDer1.classList.contains("yellow") &&
+                  !fichaIzq1.classList.contains("red") &&
+                  !fichaIzq1.classList.contains("yellow")
+                ) {
+                  if (Math.floor(Math.random() * 2 + 1) == 1) {
+                    console.log(
+                      "I´d put a chip in",
+                      casillasAmarillas[i].col + 1
+                    );
+                    return cpuYellow(casillasAmarillas[i].col + 1);
+                  } else {
+                    console.log(
+                      "I´d put a chip in",
+                      casillasAmarillas[i].col - 2
+                    );
+                    return cpuYellow(casillasAmarillas[i].col - 2);
+                  }
+                }
+                //Supuesto de que las 2 fichas están pegadas al borde izquierdo
+              } else if (fichaDer1 && fichaDer2) {
+                if (
+                  !fichaDer1.classList.contains("red") &&
+                  !fichaDer1.classList.contains("yellow") &&
+                  !fichaDer2.classList.contains("red") &&
+                  !fichaDer2.classList.contains("yellow")
+                ) {
+                  console.log(
+                    "I´d put a chip in",
+                    casillasAmarillas[i].col + 1
+                  );
+                  return cpuYellow(casillasAmarillas[i].col + 1);
+                }
+                //Supuesto de que las 2 fichas están pegadas al borde derecho del tablero
+              } else if (fichaIzq1 && fichaIzq2) {
+                if (
+                  !fichaIzq1.classList.contains("red") &&
+                  !fichaIzq1.classList.contains("yellow") &&
+                  !fichaIzq2.classList.contains("red") &&
+                  !fichaIzq2.classList.contains("yellow")
+                ) {
+                  console.log(
+                    "I´d put a chip in",
+                    casillasAmarillas[i].col - 2
+                  );
+                  return cpuYellow(casillasAmarillas[i].col - 2);
+                }
+                //Supuesto de que las 2 fichas están a un espacio del borde izquierdo del tablero
+              } else if (fichaIzq1 && fichaDer1 && fichaDer2) {
+                if (
+                  !fichaDer1.classList.contains("red") &&
+                  !fichaDer1.classList.contains("yellow") &&
+                  !fichaDer2.classList.contains("red") &&
+                  !fichaDer2.classList.contains("yellow") &&
+                  !fichaIzq1.classList.contains("red") &&
+                  !fichaIzq1.classList.contains("yellow")
+                ) {
+                  console.log(
+                    "I´d put a chip in",
+                    casillasAmarillas[i].col - 2
+                  );
+                  return cpuYellow(casillasAmarillas[i].col - 2);
+                }
+                //Supuesto de que las 2 fichas están a un espacio del borde derecho del tablero
+              } else if (fichaIzq1 && fichaIzq2 && fichaDer1) {
+                if (
+                  !fichaDer1.classList.contains("red") &&
+                  !fichaDer1.classList.contains("yellow") &&
+                  !fichaIzq2.classList.contains("red") &&
+                  !fichaIzq2.classList.contains("yellow") &&
+                  !fichaIzq1.classList.contains("red") &&
+                  !fichaIzq1.classList.contains("yellow")
+                ) {
+                  console.log(
+                    "I´d put a chip in",
+                    casillasAmarillas[i].col + 1
+                  );
+                  return cpuYellow(casillasAmarillas[i].col + 1);
+                }
+              }
+            }
+            //Una casillas aislada
+            else {
+              //Definir casillas de juego
+              // prettier-ignore
+              let fichaUp1 = document.querySelector(`#col${casillasAmarillas[i].col}row${casillasAmarillas[i].row + 1}`);
+              let fichaUp2 = document.querySelector(`#col${casillasAmarillas[i].col}row${casillasAmarillas[i].row + 2}`);
+              let fichaUp3 = document.querySelector(`#col${casillasAmarillas[i].col}row${casillasAmarillas[i].row + 3}`);
+              let fichaDer1 = document.querySelector(`#col${casillasAmarillas[i].col + 1}row${casillasAmarillas[i].row}`);
+              let fichaDer2 = document.querySelector(`#col${casillasAmarillas[i].col + 2}row${casillasAmarillas[i].row}`);
+              let fichaDer3 = document.querySelector(`#col${casillasAmarillas[i].col + 3}row${casillasAmarillas[i].row}`);
+              let fichaIzq1 = document.querySelector(`#col${casillasAmarillas[i].col - 1}row${casillasAmarillas[i].row}`);
+              let fichaIzq2 = document.querySelector(`#col${casillasAmarillas[i].col - 2}row${casillasAmarillas[i].row}`);
+              let fichaIzq3 = document.querySelector(`#col${casillasAmarillas[i].col - 3}row${casillasAmarillas[i].row}`);
+              let fichaDaDer1 = document.querySelector(`#col${casillasAmarillas[i].col + 1}row${casillasAmarillas[i].row + 1}`);
+              let fichaDaDer2 = document.querySelector(`#col${casillasAmarillas[i].col + 2}row${casillasAmarillas[i].row + 2}`);
+              let fichaDaDer3 = document.querySelector(`#col${casillasAmarillas[i].col + 3}row${casillasAmarillas[i].row + 3}`);
+              let fichaDaIzq1 = document.querySelector(`#col${casillasAmarillas[i].col - 1}row${casillasAmarillas[i].row - 1}`);
+              let fichaDaIzq2 = document.querySelector(`#col${casillasAmarillas[i].col - 2}row${casillasAmarillas[i].row - 2}`);
+              let fichaDaIzq3 = document.querySelector(`#col${casillasAmarillas[i].col - 3}row${casillasAmarillas[i].row - 3}`);
+              let fichaDdDer1 = document.querySelector(`#col${casillasAmarillas[i].col + 1}row${casillasAmarillas[i].row - 1}`);
+              let fichaDdDer2 = document.querySelector(`#col${casillasAmarillas[i].col + 2}row${casillasAmarillas[i].row - 2}`);
+              let fichaDdDer3 = document.querySelector(`#col${casillasAmarillas[i].col + 3}row${casillasAmarillas[i].row - 3}`);
+              let fichaDdIzq1 = document.querySelector(`#col${casillasAmarillas[i].col - 1}row${casillasAmarillas[i].row + 1}`);
+              let fichaDdIzq2 = document.querySelector(`#col${casillasAmarillas[i].col - 2}row${casillasAmarillas[i].row + 2}`);
+              let fichaDdIzq3 = document.querySelector(`#col${casillasAmarillas[i].col - 3}row${casillasAmarillas[i].row + 3}`);
+              
+              //Comprobar la horizontal
+              if (
+                fichaDer1 &&
+                fichaDer2 &&
+                fichaDer3 &&
+                fichaIzq1 &&
+                fichaIzq2 &&
+                fichaIzq3
+              ) {
+                if (
+                  (!fichaDer1.classList.contains("red") &&
+                    !fichaDer2.classList.contains("red") &&
+                    !fichaDer3.classList.contains("red")) ||
+                  (!fichaDer1.classList.contains("red") &&
+                    !fichaDer2.classList.contains("red") &&
+                    !fichaIzq1.classList.contains("red"))
+                ) {
+                  console.log(
+                    "I´d put a chip in",
+                    casillasAmarillas[i].col + 1
+                  );
+                  return cpuYellow(casillasAmarillas[i].col + 1);
+                } else if (
+                  (!fichaIzq1.classList.contains("red") &&
+                    !fichaIzq2.classList.contains("red") &&
+                    !fichaIzq3.classList.contains("red")) ||
+                  (!fichaDer1.classList.contains("red") &&
+                    !fichaIzq1.classList.contains("red") &&
+                    !fichaIzq2.classList.contains("red"))
+                ) {
+                  console.log(
+                    "I´d put a chip in",
+                    casillasAmarillas[i].col - 1
+                  );
+                  return cpuYellow(casillasAmarillas[i].col - 1);
+                }
+              } else if (!fichaIzq3 && fichaIzq2) {
+                if (
+                  (!fichaDer1.classList.contains("red") &&
+                    !fichaDer2.classList.contains("red") &&
+                    !fichaDer3.classList.contains("red")) ||
+                  (!fichaDer1.classList.contains("red") &&
+                    !fichaDer2.classList.contains("red") &&
+                    !fichaIzq1.classList.contains("red"))
+                ) {
+                  console.log(
+                    "I´d put a chip in",
+                    casillasAmarillas[i].col + 1
+                  );
+                  return cpuYellow(casillasAmarillas[i].col + 1);
+                } else if (
+                  !fichaDer1.classList.contains("red") &&
+                  !fichaIzq1.classList.contains("red") &&
+                  !fichaIzq2.classList.contains("red")
+                ) {
+                  console.log(
+                    "I´d put a chip in",
+                    casillasAmarillas[i].col - 1
+                  );
+                  return cpuYellow(casillasAmarillas[i].col - 1);
+                }
+              } else if (!fichaDer3 && fichaDer2) {
+                if (
+                  !fichaDer1.classList.contains("red") &&
+                  !fichaDer2.classList.contains("red") &&
+                  !fichaIzq1.classList.contains("red")
+                ) {
+                  console.log(
+                    "I´d put a chip in",
+                    casillasAmarillas[i].col + 1
+                  );
+                  return cpuYellow(casillasAmarillas[i].col + 1);
+                } else if (
+                  (!fichaIzq1.classList.contains("red") &&
+                    !fichaIzq2.classList.contains("red") &&
+                    !fichaIzq3.classList.contains("red")) ||
+                  (!fichaDer1.classList.contains("red") &&
+                    !fichaIzq1.classList.contains("red") &&
+                    !fichaIzq2.classList.contains("red"))
+                ) {
+                  console.log(
+                    "I´d put a chip in",
+                    casillasAmarillas[i].col - 1
+                  );
+                  return cpuYellow(casillasAmarillas[i].col - 1);
+                }
+              } else if (!fichaIzq2 && fichaIzq1) {
+                if (
+                  (!fichaDer1.classList.contains("red") &&
+                    !fichaDer2.classList.contains("red") &&
+                    !fichaDer3.classList.contains("red")) ||
+                  (!fichaDer1.classList.contains("red") &&
+                    !fichaDer2.classList.contains("red") &&
+                    !fichaIzq1.classList.contains("red"))
+                ) {
+                  console.log(
+                    "I´d put a chip in",
+                    casillasAmarillas[i].col + 1
+                  );
+                  return cpuYellow(casillasAmarillas[i].col + 1);
+                }
+              } else if (!fichaDer2 && fichaDer1) {
+                if (
+                  (!fichaIzq1.classList.contains("red") &&
+                    !fichaIzq2.classList.contains("red") &&
+                    !fichaIzq3.classList.contains("red")) ||
+                  (!fichaDer1.classList.contains("red") &&
+                    !fichaIzq1.classList.contains("red") &&
+                    !fichaIzq2.classList.contains("red"))
+                ) {
+                  console.log(
+                    "I´d put a chip in",
+                    casillasAmarillas[i].col - 1
+                  );
+                  return cpuYellow(casillasAmarillas[i].col - 1);
+                }
+              } else if (!fichaDer1) {
+                if (
+                  !fichaIzq1.classList.contains("red") &&
+                  !fichaIzq2.classList.contains("red") &&
+                  !fichaIzq3.classList.contains("red")
+                ) {
+                  console.log(
+                    "I´d put a chip in",
+                    casillasAmarillas[i].col - 1
+                  );
+                  return cpuYellow(casillasAmarillas[i].col - 1);
+                }
+              } else if (!fichaIzq1) {
+                if (
+                  !fichaDer1.classList.contains("red") &&
+                  !fichaDer2.classList.contains("red") &&
+                  !fichaDer3.classList.contains("red")
+                ) {
+                  console.log(
+                    "I´d put a chip in",
+                    casillasAmarillas[i].col + 1
+                  );
+                  return cpuYellow(casillasAmarillas[i].col + 1);
+                }
+              }
+              //Comprobar posible vertical
+              if (fichaUp1 && fichaIzq2 && fichaUp3) {
+                if (
+                  !fichaUp3.classList.contains("red") &&
+                  !fichaUp2.classList.contains("red") &&
+                  !fichaUp1.classList.contains("red")
+                ) {
+                  console.log("I´d put a chip in", casillasAmarillas[i].col);
+                  return cpuYellow(casillasAmarillas[i].col);
+                }
+              }
+            }
           }
         }
+      
+        let ranCol = Math.floor(Math.random() * 7 + 1);
+        return cpuYellow(ranCol);
       }
-      //Dos diagonal ascendente
-      //Dos diagonal descendente
     }
-  };
-  console.log("Could I win?");
+    console.log("Could I win?");
   let winY = checkWinningPlay("yellow");
   console.log("winY", winY);
   if (winY == false) {
