@@ -6,9 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Conecta4</title>
     <link rel="stylesheet" href="index.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=KoHo:wght@400;700&display=swap" rel="stylesheet">
   </head>
   <body>
     <div id="container">
+      <h1 class="title">CONECT-4 &#x1f3f3;&#xfe0f;&#x200d;&#x1f308;</h1>
+      <div id="gameMode">Gamemode: Player vs Player</div>
       <h1 id="turn">Turno P1 (Rojas)</h1>
       <div id="tablero">
         <div class="fila" id="fila6">
@@ -67,9 +71,12 @@
         </div>
       </div>
 
-      <button id="playerVSplayer">P1 vs P2</button>
-      <button id="playerVScpu">Player vs CPU</button>
-      <div id="gameMode">Player vs Player</div>
+      <div class="gameModeButtons">
+        <button id="playerVSplayer">P1 vs P2</button>
+        <button id="playerVScpu">Player vs CPU</button>
+      </div>
+      
+      
       <button id="reset">&#8635</button>
     </div>
 

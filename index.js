@@ -325,12 +325,12 @@ let gameMode = 1;
 playerVsPlayer.addEventListener("click", () => {
   gameMode = 1;
   resetFunc();
-  gameModeDisplay.textContent = "Player vs Player";
+  gameModeDisplay.textContent = "Gamemode: Player vs Player";
 });
 playerVsCpu.addEventListener("click", () => {
   gameMode = 2;
   resetFunc();
-  gameModeDisplay.textContent = "Player vs CPU";
+  gameModeDisplay.textContent = "Gamemode: Player vs CPU";
 });
 
 let cpuDecision = () => {
